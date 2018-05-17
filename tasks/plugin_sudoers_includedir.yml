@@ -1,0 +1,23 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# plugin_sudoers_includedir tasks file for opsview-agent
+- name: Find the location of the sudoers include directory
+  command:      grep '^#includedir' /etc/sudoers
+  register:     ansible_agent_sudoers
+  check_mode:   false
+  changed_when: false
+
+- name: Select the first sudoers include directory found
+  set_fact:
+    ansible_agent_sudoers_d: "{{ ansible_agent_sudoers.stdout_lines[0].split(' ')[1] }}"
+
+- name: Ensure the sudoers.d directory {{ ansible_agent_sudoers_d }} exists
+  file:
+    state:        directory
+    owner:        'root'
+    group:        'root'
+    mode:         0750
+    path:         "{{ ansible_agent_sudoers_d }}"

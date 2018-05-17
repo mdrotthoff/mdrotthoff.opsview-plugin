@@ -1,0 +1,1 @@
+command[{{ plugin_item.name }}]={% if plugin_item.sudo is defined %}/usr/bin/sudo {% endif %}{{ opsview_agent_plugin_local }}/{{ plugin_item.name }}{% if plugin_item.arg_count is defined %}{% for i in range(1, plugin_item.arg_count + 1) %} $ARG{{ i }}${% endfor %}{% endif %}

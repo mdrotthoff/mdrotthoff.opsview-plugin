@@ -1,0 +1,8 @@
+# Managed by Ansible
+{% if plugin_item.sudo == 'user' %}
+{{ opsview_agent_user }} ALL = NOPASSWD: {{ opsview_agent_plugin_local }}/{{ plugin_item.name }} *
+{% elif plugin_item.sudo == 'group' %}
+{{ '%' }}{{ opsview_agent_group }} ALL = NOPASSWD: {{ opsview_agent_plugin_local }}/{{ plugin_item.name }} *
+{% else %}
+# Undefined sudo type for {{ opsview_agent_plugin_local }}
+{% endif %}

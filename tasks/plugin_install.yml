@@ -1,0 +1,33 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# plugin-install file for opsview-agent
+
+- name: Create the {{ plugin_item.name }} configuration file
+  template:
+    src:    plugin_cfg.j2
+    dest:   "{{ opsview_agent_cfg_local }}/{{ plugin_item.name }}.cfg"
+    owner:  "{{ opsview_agent_user }}"
+    group:  "{{ opsview_agent_group }}"
+    mode:   '0644'
+    backup: false
+  notify:   Restart OpsView Agent
+
+- name: Create list of sources to install {{ plugin_item.name }}
+  set_fact:
+    opsview_agent_plugin_source_list: "{{ ((plugin_item.source | default([])) | list + [ plugin_item.name ]) | unique }}"
+
+- name: Copy the source for {{ plugin_item.name }} to the plug-in directory
+  copy:
+    src:    "{{ opsview_agent_plugin_source }}/{{ item }}"
+    dest:   "{{ opsview_agent_plugin_local }}/{{ item }}"
+    owner:  "{{ opsview_agent_user }}"
+    group:  "{{ opsview_agent_group }}"
+    mode:   '0754'
+  loop:     "{{ opsview_agent_plugin_source_list }}"
+
+- name: Create the necessary sudoers entry for {{ plugin_item.name }} if requested
+  include_tasks:  plugin_sudo.yml
+  when:           plugin_item.sudo is defined

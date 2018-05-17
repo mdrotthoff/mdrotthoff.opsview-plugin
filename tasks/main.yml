@@ -1,0 +1,35 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# main file for opsview-agent
+
+- name: Get the current version of Opsview-Agent installed
+  package:
+    list:     opsview-agent
+  register:   opsview_agent_version_check
+
+- name: Capture the version of the OpsView Agent currently installed
+  set_fact:
+    opsview_agent_current_version:  "{{ opsview_agent_version_check.results[0].version }}"
+  when: opsview_agent_version_check.results[0] is defined
+
+- name: Set a default OpsView Agent version of 0.0.0
+  set_fact:
+    opsview_agent_current_version:  "0.0.0"
+  when: opsview_agent_current_version is not defined
+
+- name: Installing / Upgrading OpsView Agent version from {{ opsview_agent_current_version }} to {{ opsview_agent_version }}
+  include_tasks: agent_install.yml
+  when:          (opsview_agent_version is version(opsview_agent_current_version, '>'))
+
+- name: Configure local plug-in support for the OpsView Agent version {{ opsview_agent_current_version }}
+  include_tasks: plugin_config.yml
+
+- name: Deploy and configure local plug-ins
+  include_tasks: plugin_install.yml
+  loop:          "{{ opsview_agent_plugins }}"
+  loop_control:
+    loop_var:    plugin_item
+  when:          opsview_agent_plugins is defined
