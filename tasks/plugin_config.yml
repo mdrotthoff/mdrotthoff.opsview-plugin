@@ -5,7 +5,7 @@
 
 # agent_local_config tasks file for opsview-agent
 
-- name: Create directory for local plug-in configuration files
+- name: Create directory for local Opsview plug-in configuration files
   file:
     state:        directory
     owner:        "{{ opsview_agent_user }}"
@@ -13,7 +13,7 @@
     mode:         0755
     path:         "{{ opsview_agent_cfg_local }}"
 
-- name: Create directory for local plug-in files
+- name: Create directory for local Opsview plug-in files
   file:
     state:       directory
     owner:       "{{ opsview_agent_user }}"
@@ -21,7 +21,7 @@
     mode:        0755
     path:        "{{ opsview_agent_plugin_local }}"
 
-- name: Ensure the local plug-in configuration files are included by the agent
+- name: Ensure the local Opsview plug-in configuration files are included by the agent
   lineinfile:
     dest:        "{{ opsview_agent_cfg_file }}"
     line:        "include_dir={{ opsview_agent_cfg_local }}"
