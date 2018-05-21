@@ -33,7 +33,7 @@
     dest:   "{{ opsview_agent_plugin_local }}/{{ item }}"
     owner:  "{{ opsview_agent_user }}"
     group:  "{{ opsview_agent_group }}"
-    mode:   '0754'
+    mode:   '0644'
   loop:     "{{ plugin_item.source }}"
   when:     plugin_item.source is defined
 
