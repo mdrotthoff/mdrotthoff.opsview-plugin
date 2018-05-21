@@ -23,10 +23,6 @@
     group:  "{{ opsview_agent_group }}"
     mode:   '0754'
 
-#- name: Create list of sources to install {{ plugin_item.name }}
-#  set_fact:
-#    opsview_agent_plugin_source_list: "{{ ((plugin_item.source | default([])) | list + [ plugin_item.name ]) | unique }}"
-
 - name: Copy the plug-in sources for {{ plugin_item.name }} to the plug-in directory
   copy:
     src:    "{{ opsview_agent_plugin_source }}/{{ item.file_name }}"

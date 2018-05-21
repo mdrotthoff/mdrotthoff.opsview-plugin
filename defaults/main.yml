@@ -20,6 +20,8 @@ opsview_agent_plugins:
 - name:        'check_es_attribute_jsonpath_vauto'
 - name:        'check_oracle_vauto'
   source:
-  -            'check_oracle_vauto.cfg'
+  - file_name: 'check_oracle_vauto.cfg'
+    file_privs: '0644'
+    target_dir: '/usr/local/nagios'
   arg_count:   4
   sudo:        'group'
