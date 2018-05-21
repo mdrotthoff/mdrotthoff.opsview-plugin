@@ -13,23 +13,13 @@ opsview_agent_cfg_local:         "{{ opsview_agent_cfg_directory }}/nrpe_local"
 opsview_agent_plugin_directory:  "{{ opsview_agent_directory }}/libexec"
 opsview_agent_plugin_local:      "{{ opsview_agent_plugin_directory }}/nrpe_local"
 opsview_agent_service:           "opsview-agent"
-#opsview_agent_version:           "5.4.0.171370838"
-opsview_agent_version:           "5.4.1.172541017"
-opsview_agent_release:           "1"
-opsview_agent_package:           "opsview-agent-{{ opsview_agent_version }}-{{ opsview_agent_release }}.el{{ ansible_distribution_major_version }}.{{ ansible_architecture }}.rpm"
-opsview_agent_agent_source:      "files/opsview/agent"
 opsview_agent_plugin_source:     "files/opsview/plugin"
 
-#opsview_agent_plugins:
-#- name:    'check_diskstat'
-#  source:
-#  -            'check_diskstat'
-#  arg_count:   1
-#  sudo:        'user'
-#- name:    'check_es_attribute_jsonpath_vauto'
-#- name:    'check_oracle_vauto'
-#  source:
-#  -            'check_oracle_vauto'
-#  -            'check_oracle_vauto.cfg'
-#  arg_count:   4
-#  sudo:        'group'
+opsview_agent_plugins:
+- name:    'check_diskstat'
+- name:        'check_es_attribute_jsonpath_vauto'
+- name:        'check_oracle_vauto'
+  source:
+  -            'check_oracle_vauto.cfg'
+  arg_count:   4
+  sudo:        'group'

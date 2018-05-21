@@ -3,7 +3,7 @@
 # $Date$
 # $Source$
 
-# agent_local_config tasks file for opsview-agent
+# plugin_config tasks file for opsview-plugin
 
 - name: Create directory for local Opsview plug-in configuration files
   file:

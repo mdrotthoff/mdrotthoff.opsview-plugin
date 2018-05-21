@@ -1,4 +1,4 @@
-# Managed by Ansible
+# {{ ansible_managed }}
 {% if plugin_item.sudo == 'user' %}
 {{ opsview_agent_user }} ALL = NOPASSWD: {{ opsview_agent_plugin_local }}/{{ plugin_item.name }} *
 {% elif plugin_item.sudo == 'group' %}

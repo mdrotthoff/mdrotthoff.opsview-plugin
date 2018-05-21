@@ -5,21 +5,21 @@
 
 # main file for opsview-plugin
 
-- name: Get the current version of opsview-agent installed
-  package:
-    list:     opsview-agent
-  register:   opsview_agent_version_check
-  tags:
-  - configuration
-  - opsview
-  - opsview plugin
+#- name: Get the current version of opsview-agent installed
+#  package:
+#    list:     opsview-agent
+#  register:   opsview_agent_version_check
+#  tags:
+#  - configuration
+#  - opsview
+#  - opsview plugin
 
-- name: Show the results of checking the current version of opsview-agent
-  debug:
-    var:  opsview_agent_version_check
-  tags:
-  - debug
-  - never
+#- name: Show the results of checking the current version of opsview-agent
+#  debug:
+#    var:  opsview_agent_version_check
+#  tags:
+#  - debug
+#  - never
 
 #- name: Capture the version of the OpsView Agent currently installed
 #  set_fact:
@@ -40,7 +40,7 @@
   tags:
   - configuration
   - opsview
-  - opsview plugin
+  - opsview-plugin
 
 - name: Deploy and configure local Opsview plug-ins
   include_tasks: plugin_install.yml
@@ -51,4 +51,4 @@
   tags:
   - configuration
   - opsview
-  - opsview plugin
+  - opsview-plugin
