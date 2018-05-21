@@ -29,11 +29,11 @@
 
 - name: Copy the plug-in sources for {{ plugin_item.name }} to the plug-in directory
   copy:
-    src:    "{{ opsview_agent_plugin_source }}/{{ item }}"
-    dest:   "{{ opsview_agent_plugin_local }}/{{ item }}"
-    owner:  "{{ opsview_agent_user }}"
-    group:  "{{ opsview_agent_group }}"
-    mode:   '0644'
+    src:    "{{ opsview_agent_plugin_source }}/{{ item.file_name }}"
+    dest:   "{{ item.target_dir | default(opsview_agent_plugin_local) }}/{{ item.file_name }}"
+    owner:  "{{ item.user | default(opsview_agent_user) }}"
+    group:  "{{ item.group | default(opsview_agent_group) }}"
+    mode:   "{{ item.file_privs | default('0644') }}"
   loop:     "{{ plugin_item.source }}"
   when:     plugin_item.source is defined
 
