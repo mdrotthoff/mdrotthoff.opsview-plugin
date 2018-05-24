@@ -18,10 +18,18 @@ opsview_agent_plugin_source:     "files/opsview/plugin"
 opsview_agent_plugins:
 - name:        'check_diskstat'
 - name:        'check_es_attribute_jsonpath_vauto'
+- name:        'check_linux_bonding_vauto'
+- name:        'check_linux_metrics_vauto'
 - name:        'check_oracle_vauto'
   source:
   - file_name: 'check_oracle_vauto.cfg'
     file_privs: '0644'
     target_dir: '/usr/local/nagios'
   arg_count:   4
-  sudo:        'group'
+- name:        'check_gg_lag_vauto'
+  source:
+  - file_name: 'check_gg_lag_vauto.cfg'
+    file_privs: '0644'
+    target_dir: '/usr/local/nagios'
+  sudo:         'group'
+
