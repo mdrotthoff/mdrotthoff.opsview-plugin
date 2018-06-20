@@ -19,10 +19,11 @@
 
 - name: Deploy and configure local Opsview plug-ins
   include_tasks: plugin_install.yml
-  loop:          "{{ opsview_agent_plugins }}"
+  loop: "{{ opsview_agent_plugins }}"
   loop_control:
-    loop_var:    plugin_item
-  when:          opsview_agent_plugins is defined
+    loop_var: plugin_item
+  when:
+  - opsview_agent_plugins is defined
   tags:
   - configuration
   - opsview

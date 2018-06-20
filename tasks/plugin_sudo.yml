@@ -7,14 +7,14 @@
 
 - name: Find the sudoers includedir location
   include_tasks: plugin_sudoers_includedir.yml
-  when:          ansible_agent_sudoers_d is not defined
+  when: ansible_agent_sudoers_d is not defined
 
 - name: Create the sudo configuration file for {{ plugin_item.name }}
   template:
-    src:         plugin_sudo.j2
-    dest:        "{{ ansible_agent_sudoers_d }}/{{ opsview_agent_user }}_{{ plugin_item.name }}"
-    owner:       'root'
-    group:       'root'
-    mode:        '0440'
-    backup:      false
-    validate:    '/usr/sbin/visudo -cf %s'
+    src: plugin_sudo.j2
+    dest: "{{ ansible_agent_sudoers_d }}/{{ opsview_agent_user }}_{{ plugin_item.name }}"
+    owner: 'root'
+    group: 'root'
+    mode: '0440'
+    backup: false
+    validate: '/usr/sbin/visudo -cf %s'

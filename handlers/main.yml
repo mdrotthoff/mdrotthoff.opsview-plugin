@@ -8,11 +8,11 @@
 - name: Stop the OpsView Agent
   listen: Restart OpsView Agent
   service:
-    name:  "{{ opsview_agent_service }}"
+    name: "{{ opsview_agent_service }}"
     state: stopped
 
 - name: Start the OpsView Agent
   listen: Restart OpsView Agent
   service:
-    name:  "{{ opsview_agent_service }}"
+    name: "{{ opsview_agent_service }}"
     state: started
