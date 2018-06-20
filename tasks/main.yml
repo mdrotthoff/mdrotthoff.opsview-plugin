@@ -15,7 +15,7 @@
 - name: Display plugins to be configured
   debug:
     var: opsview_agent_plugins
-  verbosity: 2
+    verbosity: 2
 
 - name: Deploy and configure local Opsview plug-ins
   include_tasks: plugin_install.yml
