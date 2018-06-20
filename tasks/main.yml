@@ -14,7 +14,7 @@
 
 - name: Display plugins to be configured
   debug:
-    var: "{{ opsview_agent_plugins }}"
+    var: opsview_agent_plugins
   verbosity: 2
 
 - name: Deploy and configure local Opsview plug-ins
